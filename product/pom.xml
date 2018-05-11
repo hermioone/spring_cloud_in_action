@@ -6,6 +6,9 @@
 	<groupId>com.imooc</groupId>
 	<artifactId>product</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<modules>
+		<module>client</module>
+	</modules>
 	<packaging>jar</packaging>
 
 	<name>product</name>

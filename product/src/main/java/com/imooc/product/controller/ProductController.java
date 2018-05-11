@@ -6,14 +6,13 @@ import com.imooc.product.VO.ProductVO;
 import com.imooc.product.VO.ResultVO;
 import com.imooc.product.dataObject.ProductCategory;
 import com.imooc.product.dataObject.ProductInfo;
+import com.imooc.product.dto.CartDTO;
 import com.imooc.product.service.CategoryService;
 import com.imooc.product.service.ProductService;
 import com.imooc.product.utils.ResultVOUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,5 +62,21 @@ public class ProductController {
         }
 
         return ResultVOUtil.success(productVOList);
+    }
+
+    /**
+     * 获取商品列表(给订单服务用的)
+     *
+     * @param productIdList
+     * @return
+     */
+    @PostMapping("/listForOrder")
+    public List<ProductInfo> listForOrder(@RequestBody List<String> productIdList) {
+        return productService.findList(productIdList);
+    }
+
+    @PostMapping("/decreaseStock")
+    public void decreaseStock(@RequestBody List<CartDTO> decreaseStockInputList) {
+        productService.decreaseStock(decreaseStockInputList);
     }
 }
